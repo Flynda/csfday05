@@ -1,0 +1,84 @@
+<mat-toolbar color="primary">
+    <span>Mini Bitcoin App</span>
+</mat-toolbar>
+
+<mat-divider></mat-divider>
+
+<div fxLayout="column" fxLayoutAlign="start stretch" class="card">
+    <div fxLayout="row" fxLayoutAlign="center">
+        <div fxFlex="90%" fxFlex.md="66.6667%" fxFlex.gt-md="50%">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        Order Form
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="orderForm" (ngSubmit)="addOrder()" #formDirective="ngForm">
+                        <div fxLayout="column" fxLayoutGap="10px">
+                            <mat-form-field>
+                                <mat-label>Contact No.</mat-label>
+                                <input matInput formControlName="contactNo">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Name</mat-label>
+                                <input type="tel" matInput formControlName="name">
+                            </mat-form-field>
+                            <label id="group-label">Gender: &nbsp;</label>
+                            <mat-radio-group aria-labelledby="group-label" formControlName="gender">
+                                <mat-radio-button value="male">
+                                    Male &nbsp;
+                                </mat-radio-button>
+                                <mat-radio-button value="female">
+                                    Female &nbsp;
+                                </mat-radio-button>
+                            </mat-radio-group>
+                            <mat-form-field>
+                                <mat-label>Date of Birth: </mat-label>
+                                <input matInput 
+                                    formControlName="dateOfBirth" 
+                                    [matDatepicker]="dob"
+                                    [max]="maxDate">
+                                <mat-datepicker-toggle matSuffix 
+                                    [for]="dob">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #dob>
+                                </mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Order Date: </mat-label>
+                                <input matInput 
+                                    formControlName="orderDate" 
+                                    [matDatepicker]="orderDate">
+                                <mat-datepicker-toggle matSuffix 
+                                    [for]="orderDate">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #orderDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                            
+                            <mat-form-field appearance="fill">
+                                <mat-label>Order type</mat-label>
+                                <mat-select formControlName="orderType">
+                                  <mat-option>None</mat-option>
+                                  <mat-option value="buy">Buy</mat-option>
+                                  <mat-option value="sell">Sell</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Order unit</mat-label>
+                                <input matInput formControlName="orderUnit">
+                            </mat-form-field>
+                            <button mat-raised-button type="submit" [disabled]="orderForm.invalid" color="primary">
+                                <mat-icon aria-hidden="false" aria-label="Order">add_shopping_cart</mat-icon>
+                            </button>
+                            <button mat-raised-button (click)="reset(formDirective)" color="warn">
+                                <mat-icon aria-hidden="false" aria-label="Reset">refresh</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
